@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Function;
 
 public class Main {
 
@@ -25,6 +26,15 @@ public class Main {
 //        EmailSender emailSender = new Main().getEmailSender(choice);
 //        if (emailSender != null) emailSender.sendEmail("");
         List<String>  videoGames = List.of("God of War", "Gears of War", "Devil May Cry 3");
-        videoGames.forEach(games -> System.out.println(games));
+        videoGames.forEach(System.out::println);
+        int number = plusOne(1);
+    }
+
+    static Function<Integer, Integer> plusOne(Integer number) {
+        return integer -> integer + number;
+    }
+
+    static int plusOne(int a) {
+        return a + 1;
     }
 }
