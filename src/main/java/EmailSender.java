@@ -1,3 +1,4 @@
+@FunctionalInterface
 public interface EmailSender {
-    void sendEmail();
+    void sendEmail(String email);
 }

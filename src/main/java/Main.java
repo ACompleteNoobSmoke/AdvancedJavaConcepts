@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -20,8 +21,10 @@ public class Main {
         };
     }
     public static void main(String[] args) {
-        int choice = input.nextInt();
-        EmailSender emailSender = new Main().getEmailSender(choice);
-        if (emailSender != null) emailSender.sendEmail();
+//        int choice = input.nextInt();
+//        EmailSender emailSender = new Main().getEmailSender(choice);
+//        if (emailSender != null) emailSender.sendEmail("");
+        List<String>  videoGames = List.of("God of War", "Gears of War", "Devil May Cry 3");
+        videoGames.forEach(games -> System.out.println(games));
     }
 }
