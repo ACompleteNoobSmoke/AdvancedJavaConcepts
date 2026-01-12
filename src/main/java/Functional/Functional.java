@@ -4,6 +4,7 @@ import com.sun.tools.javac.Main;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 public class Functional {
 
@@ -16,6 +17,6 @@ public class Functional {
 
     public static void main(String[] args) {
 //        System.out.println(plusOne.apply(10));
-        List.of(1,2,3,4,5,6,7,8,9,10).stream().map(x -> combined.apply(x)).forEach(System.out::println);
+        Stream.of(1,2,3,4,5,6,7,8,9,10).map(x -> combined.apply(x)).forEach(System.out::println);
     }
 }
