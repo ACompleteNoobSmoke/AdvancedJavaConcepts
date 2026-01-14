@@ -36,7 +36,7 @@ public class Main {
 //        int number = plusOne(1);
         List<String> emails = PredicateFunction.getEmails();
         EmailValidator emailValidator = new EmailValidator();
-        emails.stream().filter(emailValidator).forEach(System.out::println);
+        emails.stream().filter(emailValidator).forEach(emailValidator::printEmail);
 
 
     }

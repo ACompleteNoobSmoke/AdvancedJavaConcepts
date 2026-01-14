@@ -2,7 +2,9 @@ package Model;
 
 public record Person(
         String name,
-        String occupation
+        String occupation,
+        String email,
+        int age
 ) {
 
     public String toString(){
