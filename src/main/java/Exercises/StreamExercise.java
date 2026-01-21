@@ -49,7 +49,6 @@ public class StreamExercise {
 
     public List<NewPeople> getPersonFromData(String data) {
         String formatttedData = transform(data);
-//        System.out.println(formatttedData);
         return Arrays.stream(formatttedData.split("\n"))
                 .map(StreamExercise::mapToPerson)
                 .filter(person -> person.gender() == Gender.FEMALE)
@@ -60,14 +59,12 @@ public class StreamExercise {
 
     private static NewPeople mapToPerson(String line) {
         String[] fields = line.trim().split(",");
-//        System.out.println(line);
-        Gender gender = fields[4].equals("FEMALE") ? Gender.FEMALE : Gender.MALE;
         return new NewPeople(
                 fields[1],
                 fields[2],
                 Integer.parseInt(fields[0]),
                 fields[3],
-                gender
+                Gender.valueOf(fields[4])
         );
     }
 
