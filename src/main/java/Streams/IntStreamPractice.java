@@ -30,7 +30,11 @@ public class IntStreamPractice {
                 .forEach(System.out::println);
         int sum = IntStream.range(1, 5).sum();
         System.out.println(sum);
+    }
 
+    private int intSum() {
+        List<Integer> list = List.of(5, 1, 0, 5, 100, 5, 89, 2, -1, 50);
+        return list.stream().mapToInt(integer -> integer).sum();
     }
 
     public static void main(String[] args) {
@@ -38,5 +42,6 @@ public class IntStreamPractice {
 //        intStreamPractice.rangePractice();
 //        intStreamPractice.rangeIteratingLists();
         intStreamPractice.intStreamIterate();
+        System.out.println(intStreamPractice.intSum());
     }
 }
