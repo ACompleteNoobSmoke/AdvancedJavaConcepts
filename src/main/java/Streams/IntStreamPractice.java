@@ -24,9 +24,19 @@ public class IntStreamPractice {
         intstream.forEach(i -> System.out.println(people.get(i)));
     }
 
+    private void intStreamIterate() {
+        IntStream.iterate(0, value -> ++value)
+                .limit(20)
+                .forEach(System.out::println);
+        int sum = IntStream.range(1, 5).sum();
+        System.out.println(sum);
+
+    }
+
     public static void main(String[] args) {
         IntStreamPractice intStreamPractice = new IntStreamPractice();
-        intStreamPractice.rangePractice();
-        intStreamPractice.rangeIteratingLists();
+//        intStreamPractice.rangePractice();
+//        intStreamPractice.rangeIteratingLists();
+        intStreamPractice.intStreamIterate();
     }
 }
