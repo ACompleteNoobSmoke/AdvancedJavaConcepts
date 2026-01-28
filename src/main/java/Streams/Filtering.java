@@ -52,11 +52,22 @@ public class Filtering {
 
     }
 
+    // findAny returns any object/value that fits the criteria -- you have no control of the one it picks
     private NewPeople findAny(String gender){
         return people.stream()
                 .filter(person -> person.gender().toString().equals(gender))
                 .findAny()
                 .orElse(new NewPeople("Omoruyi","Omofonmwan", 30, "oso@gmail.com", Gender.MALE));
+    }
+
+    // allMatch requires that all elements matches the condition set the it returns true otherwise false
+    private boolean isInAgeRange(int ageLimit) {
+        return people.stream().allMatch(person -> person.age() >= ageLimit);
+    }
+
+    // anyMatch requires that at least 1 element matches the condition set then it returns true otherwise false
+    private boolean isPartOfGender(String gender) {
+        return people.stream().anyMatch(person -> person.gender().toString().equals(gender));
     }
 
     public static void main(String[] args) {
@@ -74,6 +85,10 @@ public class Filtering {
         System.out.println(filterObj.findFirst(3));
         System.out.println();
         System.out.println(filterObj.findAny("MALES"));
+        System.out.println();
+        System.out.println(filterObj.isInAgeRange(0));
+        System.out.println();
+        System.out.println(filterObj.isPartOfGender("MALE"));
     }
 }
 
