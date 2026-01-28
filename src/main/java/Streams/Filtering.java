@@ -4,6 +4,7 @@ import Model.Gender;
 import Model.NewPeople;
 
 import java.util.List;
+import java.util.Optional;
 
 import static Custom.NewPeopleSuppler.newPeopleSupplier;
 
@@ -38,9 +39,24 @@ public class Filtering {
     }
 
     // dropWhile ignores values while it fits the condition,
-    // the momen the condition is no longer true, then it collects the rest
+    // the moment the condition is no longer true, then it collects the rest
     private List<NewPeople> dropWhile() {
         return people.stream().dropWhile(person -> person.age() < 35).toList();
+    }
+
+    // findFirst returns the first object/value that fits the criteria
+    private NewPeople findFirst(int ageLimit) {
+        return people.stream()
+                .filter(person -> person.age() == ageLimit).findFirst()
+                .orElse(new NewPeople("Osaretin","Omofonmwan", 30, "oso@gmail.com", Gender.MALE));
+
+    }
+
+    private NewPeople findAny(String gender){
+        return people.stream()
+                .filter(person -> person.gender().toString().equals(gender))
+                .findAny()
+                .orElse(new NewPeople("Omoruyi","Omofonmwan", 30, "oso@gmail.com", Gender.MALE));
     }
 
     public static void main(String[] args) {
@@ -54,6 +70,10 @@ public class Filtering {
         filterObj.takeWhile().forEach(System.out::println);
         System.out.println();
         filterObj.dropWhile().forEach(System.out::println);
+        System.out.println();
+        System.out.println(filterObj.findFirst(3));
+        System.out.println();
+        System.out.println(filterObj.findAny("MALES"));
     }
 }
 
