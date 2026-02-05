@@ -32,6 +32,21 @@ public class Statistics {
                 .findFirst().orElseThrow(() -> new IllegalArgumentException("Error Generating People List"));
     }
 
+    public double averageAgeOfMales() {
+        return people.stream()
+                .filter(person -> person.gender().equals(Gender.MALE))
+                .mapToDouble(NewPeople::age)
+                .average()
+                .orElse(0);
+    }
+
+    public int sumOfMaleAges(){
+        return people.stream()
+                .filter(person -> Gender.MALE.equals(person.gender()))
+                .mapToInt(NewPeople::age)
+                .sum();
+    }
+
     public static void main(String[] args) {
         Statistics statistics = new Statistics();
         long average = statistics.maleCount();
@@ -39,5 +54,9 @@ public class Statistics {
         System.out.println();
         NewPeople youngMale = statistics.getYoungestMale();
         System.out.println(youngMale);
+        double averageAge = statistics.averageAgeOfMales();
+        System.out.println("Average age of males: " + averageAge);
+        int sumOfAges = statistics.sumOfMaleAges();
+        System.out.println("Sum of male ages: " + sumOfAges);
     }
 }
