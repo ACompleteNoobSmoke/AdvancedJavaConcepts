@@ -3,6 +3,7 @@ package Streams;
 import Model.Gender;
 import Model.NewPeople;
 
+import java.util.Comparator;
 import java.util.List;
 import static Custom.NewPeopleSuppler.newPeopleSupplier;
 
@@ -24,9 +25,19 @@ public class Statistics {
                 .count();
     }
 
+    public NewPeople getYoungestMale() {
+        return people.stream()
+                .filter(person -> Gender.MALE.equals(person.gender()))
+                .sorted(Comparator.comparing(NewPeople::age))
+                .findFirst().orElseThrow(() -> new IllegalArgumentException("Error Generating People List"));
+    }
+
     public static void main(String[] args) {
         Statistics statistics = new Statistics();
         long average = statistics.maleCount();
         System.out.println("Average male count: " + average);
+        System.out.println();
+        NewPeople youngMale = statistics.getYoungestMale();
+        System.out.println(youngMale);
     }
 }
