@@ -71,6 +71,12 @@ public class StreamClosingExercise {
                 .forEach(System.out::println);
     }
 
+    public void number6() {
+        transactions.stream()
+                .filter(transaction -> Double.valueOf("300").compareTo(transaction.amount()) < 0)
+                .forEach(System.out::println);
+    }
+
     public static void main(String[] args) {
 
     }
