@@ -4,7 +4,9 @@ import Model.Customer;
 import Model.Transaction;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StreamClosingExercise {
 
@@ -74,6 +76,44 @@ public class StreamClosingExercise {
     public void number6() {
         transactions.stream()
                 .filter(transaction -> Double.valueOf("300").compareTo(transaction.amount()) < 0)
+                .forEach(System.out::println);
+    }
+
+    public void number7() {
+        transactions.stream()
+                .collect(Collectors.groupingBy(s -> s.customer().id()));
+    }
+
+    public void number8() {
+        Transaction firstTransaction = transactions.stream()
+                .findFirst().orElse(null);
+        System.out.println(firstTransaction);
+    }
+
+    public void number9() {
+        boolean isGreaterThan100 = transactions.stream()
+                .map(Transaction::amount)
+                .anyMatch(t -> t > 100);
+        System.out.println("Greater Than 100: " + isGreaterThan100);
+    }
+
+    public void number10() {
+        transactions.stream()
+                .sorted(Comparator.comparingDouble(Transaction::amount))
+                .forEach(System.out::println);
+    }
+
+    public void number11() {
+        double average = transactions.stream()
+                .mapToDouble(Transaction::amount)
+                .average().orElse(-1);
+
+        System.out.println("Average: " + average);
+    }
+
+    public void number12() {
+        transactions.stream()
+                .filter(transaction -> transaction.customer().name().equals("Customer 1"))
                 .forEach(System.out::println);
     }
 
