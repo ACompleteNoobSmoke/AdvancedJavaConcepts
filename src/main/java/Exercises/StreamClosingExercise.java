@@ -3,9 +3,7 @@ package Exercises;
 import Model.Customer;
 import Model.Transaction;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class StreamClosingExercise {
@@ -115,6 +113,71 @@ public class StreamClosingExercise {
         transactions.stream()
                 .filter(transaction -> transaction.customer().name().equals("Customer 1"))
                 .forEach(System.out::println);
+    }
+
+    public void number13() {
+        List<Transaction> transactionList = transactions.stream().distinct().toList();
+        transactionList.forEach(System.out::println);
+    }
+
+    public void number14() {
+        String names = transactions.stream()
+                .map(transaction -> transaction.customer().name())
+                .distinct()
+                        .collect(Collectors.joining(","));
+        System.out.println(names);
+    }
+
+    public void number15() {
+        Transaction earliestTransaction = transactions.stream()
+                .min(Comparator.comparing(Transaction::date))
+                .orElse(null);
+        System.out.println(earliestTransaction);
+    }
+
+    public void number16() {
+        List<Transaction> transactionList = transactions.stream()
+                .filter(Objects::nonNull)
+                .filter(transaction -> transaction.date().contains("2024"))
+                .toList();
+        transactionList.forEach(System.out::println);
+    }
+
+    public void number17() {
+        Map<Customer, Double> customerSum = transactions.stream()
+                .collect(Collectors.groupingBy(Transaction::customer, Collectors.summingDouble(Transaction::amount)));
+
+        customerSum.forEach((k, v) -> {
+            System.out.println("Customer: " + k.name());
+            System.out.println("Sum: " + v);
+            System.out.println();
+        });
+    }
+
+    public void number18() {
+        List<Transaction> debitList = transactions.stream()
+                .filter(Objects::nonNull)
+                .filter(transaction -> transaction.type().contains("DEBIT"))
+                .toList();
+        debitList.forEach(System.out::println);
+    }
+
+    public void number19() {
+        Map<String, List<Transaction>> transactionMap = transactions.stream()
+                .collect(Collectors.groupingBy(Transaction::type));
+
+        transactionMap.forEach((k, v) -> {
+            System.out.println("Type: " + k);
+            v.forEach(System.out::println);
+            System.out.println();
+        });
+    }
+
+    public void number20() {
+        List<Transaction> transactionList = transactions.stream()
+                .filter(transaction -> transaction.customer().email().contains("example.com"))
+                .toList();
+        transactionList.forEach(System.out::println);
     }
 
     public static void main(String[] args) {
